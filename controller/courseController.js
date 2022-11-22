@@ -1,7 +1,7 @@
 "use strict";
-const Course = require("../models/courses.model");
+const Course = require("../models/courses.models");
 
-exports.findAll = function (req, res) {
+exports.getAllCourses = function (req, res) {
   Course.findAllCourses(function (err, course) {
     console.log("controller");
     if (err) res.send(err);
@@ -9,7 +9,8 @@ exports.findAll = function (req, res) {
   });
 };
 
-exports.create = function (req, res) {
+exports.addCourse = function (req, res) {
+  console.log(req.body);
   const new_course = new Course(req.body);
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     res
@@ -27,14 +28,14 @@ exports.create = function (req, res) {
   }
 };
 
-exports.findById = function (req, res) {
+exports.getCourses = function (req, res) {
   Course.findCourseById(req.params.id, function (err, course) {
     if (err) res.send(err);
     res.json(course);
   });
 };
 
-exports.update = function (req, res) {
+exports.updateCourse = function (req, res) {
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     res
       .status(400)
@@ -51,7 +52,7 @@ exports.update = function (req, res) {
   }
 };
 
-exports.delete = function (req, res) {
+exports.deleteCourse = function (req, res) {
   Course.delete(req.params.id, function (err, course) {
     if (err) res.send(err);
     res.json({ error: false, message: "Course successfully deleted" });

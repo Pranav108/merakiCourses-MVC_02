@@ -1,10 +1,11 @@
 const express = require("express");
 const morgan = require("morgan");
-const routes = require("./routes/course.routes");
+const bodyParser = require("body-parser");
+const routes = require("./routes/courses.routes");
 
 const app = express();
 
-app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 

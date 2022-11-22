@@ -5,7 +5,7 @@ const dbConn = mysql.createConnection({
   host: "localhost",
   user: "pranav",
   password: "pranav",
-  database: "firstdatabase",
+  database: "mvc_02_database",
 });
 dbConn.connect(function (err) {
   if (err) throw err;

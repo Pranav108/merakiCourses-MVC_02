@@ -1,5 +1,4 @@
-"use strict";
-var dbConn = require("../db.config");
+var dbConn = require("../config/db.config");
 //Course object create
 var Course = function (course) {
   this.name = course.name;
@@ -8,7 +7,7 @@ var Course = function (course) {
   this.type = course.type;
 };
 
-function showResult(err, res) {
+function showResult(err, res, result) {
   if (err) {
     console.log("error: ", err);
     result(err, null);
@@ -16,15 +15,21 @@ function showResult(err, res) {
 }
 
 Course.addCourse = function (newCourse, result) {
-  dbConn.query("INSERT INTO courses set ?", newCourse, showResult);
+  dbConn.query("INSERT INTO courses set ?", newCourse, (req, res) =>
+    showResult(req, res, result)
+  );
 };
 
 Course.findCourseById = function (id, result) {
-  dbConn.query("Select * from courses where id = ? ", id, showResult);
+  dbConn.query("Select * from courses where id = ? ", id, (req, res) =>
+    showResult(req, res, result)
+  );
 };
 
 Course.findAllCourses = function (result) {
-  dbConn.query("Select * from courses", showResult);
+  dbConn.query("Select * from courses", (req, res) =>
+    showResult(req, res, result)
+  );
 };
 
 Course.updateCourseData = function (id, course, result) {
@@ -37,12 +42,14 @@ Course.updateCourseData = function (id, course, result) {
       course.type,
       id,
     ],
-    showResult
+    (req, res) => showResult(req, res, result)
   );
 };
 
-Course.delete = function (id, result) {
-  dbConn.query("DELETE FROM courses WHERE id = ?", [id], showResult);
+Course.deleteCourse = function (id, result) {
+  dbConn.query("DELETE FROM courses WHERE id = ?", [id], (req, res) =>
+    showResult(req, res, result)
+  );
 };
 
 module.exports = Course;
