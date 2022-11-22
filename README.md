@@ -50,6 +50,10 @@ http://127.0.0.1:3002/api/v1/courses
 
 http://127.0.0.1:3002/api/v1/courses/:id
 
+###### seed some actual data into databse
+
+http://127.0.0.1:3002/api/v1/courses/seeder
+
 ## Author
 
 [Pranav108](https://github.com/Pranav108/)

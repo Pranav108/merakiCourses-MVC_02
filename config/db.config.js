@@ -1,14 +1,11 @@
-const mysql = require("mysql");
+const db = require("knex")({
+  client: "mysql",
+  connection: {
+    host: "localhost",
+    user: "pranav",
+    password: "pranav",
+    database: "mvc_02_database",
+  },
+});
 
-//local mysql db connection
-const dbConn = mysql.createConnection({
-  host: "localhost",
-  user: "pranav",
-  password: "pranav",
-  database: "mvc_02_database",
-});
-dbConn.connect(function (err) {
-  if (err) throw err;
-  console.log("Database Connected!");
-});
-module.exports = dbConn;
+module.exports = db;
